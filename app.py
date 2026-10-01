@@ -10,6 +10,10 @@ import pandas as pd
 with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
+# made using MLflow
+MODEL_VERSION = '1.0.0'
+
+
 app = FastAPI()
 
 tier_1_cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune"]
@@ -87,7 +91,9 @@ def home():
 @app.get('/health')
 def health_check():
     return {
-        'status' : 'OK'
+        'status' : 'OK',
+        'version' : MODEL_VERSION,
+        'model_loaded' : model is not None
     }
         
 @app.post('/predict')
