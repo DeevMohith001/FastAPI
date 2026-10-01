@@ -78,10 +78,17 @@ class UserInput(BaseModel):
         else:
             return 3
 
-# @app.get('/')
-# def home():
-#     return
+# Human readable
+@app.get('/')
+def home():
+    return {'message':'Insurance Premium Prediction API'}
 
+# Machine readable
+@app.get('/health')
+def health_check():
+    return {
+        'status' : 'OK'
+    }
         
 @app.post('/predict')
 def predict_premium(data: UserInput):
